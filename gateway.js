@@ -1,24 +1,10 @@
-const params = process.argv;
-
-const host_key = params[2];
-const host_value = params[3];
-const port_key = params[4];
-const port_value = params[5];
-
-if(host_key == null || host_key != '-h'){
-	console.log('Invalid host key param');
-	return;
-}
-
-if(port_key == null || port_key != '-port'){
-	console.log('Invalid port key param');
-	return;
-}
+const config = require('config');
+var appConfig = config.get('gateway');
 
 const express = require('express'),
   app = express(),
   bodyParser = require('body-parser');
-  port = process.env.PORT || port_value;
+  port = process.env.PORT || appConfig.app.port;
 
 
 app.listen(port);
