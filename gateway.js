@@ -29,7 +29,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use((req, res, next) => {
   // TODO: my authentication logic
-  console.log(req);
   next()
 });
 

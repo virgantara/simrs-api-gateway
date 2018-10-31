@@ -1,0 +1,24 @@
+{
+  "name": "simrs-api-gateway",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gateway.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "config": "^2.0.1",
+    "express": "^4.16.4",
+    "express-http-proxy": "^1.4.0",
+    "superagent": "^3.8.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://oddyvirgantara@bitbucket.org/oddyvirgantara/simrs-api-gateway.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/oddyvirgantara/simrs-api-gateway#readme"
+}
