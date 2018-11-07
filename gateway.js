@@ -1,10 +1,10 @@
-const config = require('config');
-var appConfig = config.get('gateway');
+const appConfig = require('./config/default.json');
+
 
 const express = require('express'),
   app = express(),
   bodyParser = require('body-parser');
-  port = process.env.PORT || appConfig.app.port;
+  port = process.env.PORT || appConfig.port;
 
 
 app.listen(port);

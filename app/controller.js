@@ -2,16 +2,32 @@
 
 var response = require('../app/res.js');
 const superagent = require('superagent');
-const config = require('config');
+const svc1Config = require('./../config/svc1.json');
+const svc2Config = require('./../config/svc2.json');
 
-exports.listdata = function(req, res){
-	const appConfig = config.get('gateway');
-	const svc1Config = appConfig.msvc_1;
+
+exports.listrekapdokter = function(req, res){
 	
-	superagent.get(svc1Config.protocol+'://'+svc1Config.host+':'+svc1Config.port+'/'+svc1Config.route)
+	const svcConfig = svc1Config;
+	
+	superagent.get(svcConfig.protocol+'://'+svcConfig.host+':'+svcConfig.port+'/'+svcConfig.route)
 	.query({ 
 		startdate: req.query.startdate, 
 		enddate: req.query.enddate
+	})
+	.end((err, sres) => {
+	  if (err) { console.log(err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
+exports.searchLike = function(req, res){
+	
+	const svconfig = svc2Config;
+	
+	superagent.get(svcConfig.protocol+'://'+svcConfig.host+':'+svcConfig.port+'/'+svcConfig.route)
+	.query({ 
+		key: req.query.key
 	})
 	.end((err, sres) => {
 	  if (err) { console.log(err); }
