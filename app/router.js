@@ -10,6 +10,9 @@ module.exports = function(app) {
   app.route('/pasien/like')
     .get(todoList.searchLike);
 
+  app.route('/obat/like')
+    .get(todoList.searchObatLike);
+
   // app.route('/tasks/:taskId')
   //   .get(todoList.read_a_task)
   //   .put(todoList.update_a_task)
