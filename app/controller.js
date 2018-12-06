@@ -41,8 +41,7 @@ exports.searchObatLike = function(req, res){
 	const svcConfig = svc3Config;
 	superagent.get(svcConfig.protocol+'://'+svcConfig.host+':'+svcConfig.port+'/'+svcConfig.route)
 	.query({ 
-		comp_id	: req.query.comp_id,
-		dept_id	: req.query.dept_id,
+		euid	: req.query.euid,
 		nama	: req.query.nama
 	})
 	.end((err, sres) => {
