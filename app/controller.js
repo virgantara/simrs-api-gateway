@@ -42,7 +42,7 @@ exports.searchObatLike = function(req, res){
 	superagent.get(svcConfig.protocol+'://'+svcConfig.host+':'+svcConfig.port+'/'+svcConfig.route)
 	.query({ 
 		euid	: req.query.euid,
-		nama	: req.query.nama
+		key		: req.query.key
 	})
 	.end((err, sres) => {
 	  if (err) { console.log(err); }
