@@ -8,6 +8,7 @@ const svc3Config = require('./../config/svc3.json');
 const svc4Config = require('./../config/svc4.json');
 const svc5Config = require('./../config/svc5.json');
 const svc6Config = require('./../config/svc6.json');
+const svc7Config = require('./../config/svc7.json');
 
 
 exports.listrekapdokter = function(req, res){
@@ -90,6 +91,21 @@ exports.searchNamaDokter = function(req, res){
 	superagent.get(svcConfig.protocol+'://'+svcConfig.host+':'+svcConfig.port+'/'+svcConfig.route)
 	.query({ 
 		key: req.query.key
+	})
+	.end((err, sres) => {
+	  if (err) { console.log(err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
+exports.searchRefUnit = function(req, res){
+	
+	const svcConfig = svc7Config;
+	
+	superagent.get(svcConfig.protocol+'://'+svcConfig.host+':'+svcConfig.port+'/'+svcConfig.route)
+	.query({ 
+		key: req.query.key,
+		tipe : req.query.tipe
 	})
 	.end((err, sres) => {
 	  if (err) { console.log(err); }
