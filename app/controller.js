@@ -102,9 +102,24 @@ exports.searchRefUnit = function(req, res){
 	
 	const svcConfig = svc7Config;
 	
-	superagent.get(svcConfig.protocol+'://'+svcConfig.host+':'+svcConfig.port+'/'+svcConfig.route)
+	superagent.get(svcConfig.unit.protocol+'://'+svcConfig.unit.host+':'+svcConfig.unit.port+'/'+svcConfig.unit.route)
 	.query({ 
 		key: req.query.key,
+		tipe : req.query.tipe
+	})
+	.end((err, sres) => {
+	  if (err) { console.log(err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
+
+exports.searchAllRefUnit = function(req, res){
+	
+	const svcConfig = svc7Config;
+	
+	superagent.get(svcConfig.allunit.protocol+'://'+svcConfig.allunit.host+':'+svcConfig.allunit.port+'/'+svcConfig.allunit.route)
+	.query({
 		tipe : req.query.tipe
 	})
 	.end((err, sres) => {
