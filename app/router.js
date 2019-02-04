@@ -3,7 +3,7 @@ module.exports = function(app) {
   var todoList = require('../app/controller');
 
   // todoList Routes
-  app.route('/dokter_listrekap')
+  app.route('/d/rekap')
     .get(todoList.listrekapdokter);
     // .post(todoList.create_a_task);
 
