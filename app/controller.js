@@ -11,6 +11,18 @@ const svc6Config = require('./../config/svc6.json');
 const svc7Config = require('./../config/svc7.json');
 
 
+exports.inputObatInap = function(req, res){
+	
+	const svcConfig = svc5Config;
+	
+	superagent.post(svcConfig.inputObatInap.protocol+'://'+svcConfig.inputObatInap.host+':'+svcConfig.inputObatInap.port+'/'+svcConfig.inputObatInap.route)
+	.send(req.body)
+	.end((err, sres) => {
+	  if (err) { console.log(err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
 exports.listrekapdokter = function(req, res){
 	
 	const svcConfig = svc1Config;
@@ -72,8 +84,39 @@ exports.searchRM = function(req, res){
 exports.searchPasienDaftar = function(req, res){
 	
 	const svcConfig = svc5Config;
+
+	if(req.query.jenis == 1){
+		superagent.get(svcConfig.rawatJalan.protocol+'://'+svcConfig.rawatJalan.host+':'+svcConfig.rawatJalan.port+'/'+svcConfig.rawatJalan.route)
+		.query({ 
+			key: req.query.key,
+			// jenis : req.query.jenis,
+		})
+		.end((err, sres) => {
+		  if (err) { console.log(err); }
+		  response.ok(sres.body.values, res)
+		});
+	}
+
+	else{
+		superagent.get(svcConfig.rawatInap.protocol+'://'+svcConfig.rawatInap.host+':'+svcConfig.rawatInap.port+'/'+svcConfig.rawatInap.route)
+		.query({ 
+			key: req.query.key,
+			// jenis : req.query.jenis,
+		})
+		.end((err, sres) => {
+		  if (err) { console.log(err); }
+		  response.ok(sres.body.values, res)
+		});
+	}
 	
-	superagent.get(svcConfig.protocol+'://'+svcConfig.host+':'+svcConfig.port+'/'+svcConfig.route)
+	
+};
+
+exports.searchPasienDaftarInap = function(req, res){
+	
+	const svcConfig = svc5Config;
+	
+	superagent.get(svcConfig.rawatInap.protocol+'://'+svcConfig.rawatInap.host+':'+svcConfig.rawatInap.port+'/'+svcConfig.rawatInap.route)
 	.query({ 
 		key: req.query.key,
 		// jenis : req.query.jenis,

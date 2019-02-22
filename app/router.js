@@ -19,6 +19,9 @@ module.exports = function(app) {
   app.route('/p/daftar')
     .get(todoList.searchPasienDaftar);
 
+  app.route('/p/daftar/inap')
+    .get(todoList.searchPasienDaftarInap);
+
   app.route('/d/nama')
     .get(todoList.searchNamaDokter);
 
@@ -27,6 +30,9 @@ module.exports = function(app) {
 
   app.route('/m/unit/list')
     .get(todoList.searchAllRefUnit);
+
+  app.route('/p/obat/inap')
+    .post(todoList.inputObatInap);
   // app.route('/tasks/:taskId')
   //   .get(todoList.read_a_task)
   //   .put(todoList.update_a_task)
