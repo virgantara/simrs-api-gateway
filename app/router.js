@@ -2,6 +2,10 @@
 module.exports = function(app) {
   var todoList = require('../app/controller');
 
+
+  app.route('/integra/generate/stok')
+    .post(todoList.syncStokBarangDepartemen);
+
   // todoList Routes
   app.route('/d/rekap')
     .get(todoList.listrekapdokter);

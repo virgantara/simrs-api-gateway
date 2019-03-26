@@ -3,19 +3,25 @@
 var response = require('../app/res.js');
 const superagent = require('superagent');
 const svc1Config = require('./../config/svc1.json');
-const svc2Config = require('./../config/svc2.json');
-const svc3Config = require('./../config/svc3.json');
-const svc4Config = require('./../config/svc4.json');
-const svc5Config = require('./../config/svc5.json');
-const svc6Config = require('./../config/svc6.json');
-const svc7Config = require('./../config/svc7.json');
 
+
+exports.syncStokBarangDepartemen = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	superagent.post(svcConfig.integra.protocol+'://'+svcConfig.integra.host+':'+svcConfig.integra.port+'/integra/generate/stok')
+	.send(req.body)
+	.end((err, sres) => {
+	  if (err) { console.log(err); }
+	  response.ok(sres.body.values, res)
+	});
+};
 
 exports.inputObatInap = function(req, res){
 	
-	const svcConfig = svc5Config;
+	const svcConfig = svc1Config;
 	
-	superagent.post(svcConfig.inputObatInap.protocol+'://'+svcConfig.inputObatInap.host+':'+svcConfig.inputObatInap.port+'/'+svcConfig.inputObatInap.route)
+	superagent.post(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/p/obat/inap')
 	.send(req.body)
 	.end((err, sres) => {
 	  if (err) { console.log(err); }
@@ -27,7 +33,7 @@ exports.listrekapdokter = function(req, res){
 	
 	const svcConfig = svc1Config;
 	
-	superagent.get(svcConfig.protocol+'://'+svcConfig.host+':'+svcConfig.port+'/'+svcConfig.route)
+	superagent.get(svcConfig.dokter.protocol+'://'+svcConfig.dokter.host+':'+svcConfig.dokter.port+'/d/rekap')
 	.query({ 
 		startdate: req.query.startdate, 
 		enddate: req.query.enddate
@@ -40,9 +46,9 @@ exports.listrekapdokter = function(req, res){
 
 exports.searchNama = function(req, res){
 	
-	const svcConfig = svc2Config;
+	const svcConfig = svc1Config;
 	
-	superagent.get(svcConfig.protocol+'://'+svcConfig.host+':'+svcConfig.port+'/'+svcConfig.route)
+	superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/pasien/nama')
 	.query({ 
 		key: req.query.key
 	})
@@ -55,7 +61,7 @@ exports.searchNama = function(req, res){
 exports.searchObatLike = function(req, res){
 	
 	const svcConfig = svc3Config;
-	superagent.get(svcConfig.protocol+'://'+svcConfig.host+':'+svcConfig.port+'/'+svcConfig.route)
+	superagent.get(svcConfig.obat.protocol+'://'+svcConfig.obat.host+':'+svcConfig.obat.port+'/obat/like')
 	.query({ 
 		euid	: req.query.euid,
 		key		: req.query.key
@@ -69,9 +75,9 @@ exports.searchObatLike = function(req, res){
 
 exports.searchRM = function(req, res){
 	
-	const svcConfig = svc4Config;
+	const svcConfig = svc1Config;
 	
-	superagent.get(svcConfig.protocol+'://'+svcConfig.host+':'+svcConfig.port+'/'+svcConfig.route)
+	superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/pasien/rm')
 	.query({ 
 		key: req.query.key
 	})
@@ -83,10 +89,10 @@ exports.searchRM = function(req, res){
 
 exports.searchPasienDaftar = function(req, res){
 	
-	const svcConfig = svc5Config;
+	const svcConfig = svc1Config;
 
 	if(req.query.jenis == 1){
-		superagent.get(svcConfig.rawatJalan.protocol+'://'+svcConfig.rawatJalan.host+':'+svcConfig.rawatJalan.port+'/'+svcConfig.rawatJalan.route)
+		superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/p/daftar')
 		.query({ 
 			key: req.query.key,
 			// jenis : req.query.jenis,
@@ -98,7 +104,7 @@ exports.searchPasienDaftar = function(req, res){
 	}
 
 	else{
-		superagent.get(svcConfig.rawatInap.protocol+'://'+svcConfig.rawatInap.host+':'+svcConfig.rawatInap.port+'/'+svcConfig.rawatInap.route)
+		superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/p/daftar/inap')
 		.query({ 
 			key: req.query.key,
 			// jenis : req.query.jenis,
@@ -114,9 +120,9 @@ exports.searchPasienDaftar = function(req, res){
 
 exports.searchPasienDaftarInap = function(req, res){
 	
-	const svcConfig = svc5Config;
+	const svcConfig = svc1Config;
 	
-	superagent.get(svcConfig.rawatInap.protocol+'://'+svcConfig.rawatInap.host+':'+svcConfig.rawatInap.port+'/'+svcConfig.rawatInap.route)
+	superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/p/daftar/inap')
 	.query({ 
 		key: req.query.key,
 		// jenis : req.query.jenis,
@@ -129,9 +135,9 @@ exports.searchPasienDaftarInap = function(req, res){
 
 exports.searchNamaDokter = function(req, res){
 	
-	const svcConfig = svc6Config;
+	const svcConfig = svc1Config;
 	
-	superagent.get(svcConfig.protocol+'://'+svcConfig.host+':'+svcConfig.port+'/'+svcConfig.route)
+	superagent.get(svcConfig.dokter.protocol+'://'+svcConfig.dokter.host+':'+svcConfig.dokter.port+'/d/nama')
 	.query({ 
 		key: req.query.key
 	})
@@ -143,9 +149,9 @@ exports.searchNamaDokter = function(req, res){
 
 exports.searchRefUnit = function(req, res){
 	
-	const svcConfig = svc7Config;
+	const svcConfig = svc1Config;
 	
-	superagent.get(svcConfig.unit.protocol+'://'+svcConfig.unit.host+':'+svcConfig.unit.port+'/'+svcConfig.unit.route)
+	superagent.get(svcConfig.unit.protocol+'://'+svcConfig.unit.host+':'+svcConfig.unit.port+'/m/unit')
 	.query({ 
 		key: req.query.key,
 		tipe : req.query.tipe
@@ -159,9 +165,9 @@ exports.searchRefUnit = function(req, res){
 
 exports.searchAllRefUnit = function(req, res){
 	
-	const svcConfig = svc7Config;
+	const svcConfig = svc1Config;
 	
-	superagent.get(svcConfig.allunit.protocol+'://'+svcConfig.allunit.host+':'+svcConfig.allunit.port+'/'+svcConfig.allunit.route)
+	superagent.get(svcConfig.unit.protocol+'://'+svcConfig.unit.host+':'+svcConfig.unit.port+'/m/unit/list')
 	.query({
 		tipe : req.query.tipe
 	})
