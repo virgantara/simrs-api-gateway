@@ -87,6 +87,35 @@ exports.searchRM = function(req, res){
 	});
 };
 
+exports.searchPasienDaftarRM = function(req, res){
+	
+	const svcConfig = svc1Config;
+
+	if(req.query.jenis == 1){
+		superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/p/daftar/rm')
+		.query({ 
+			key: req.query.key,
+			// jenis : req.query.jenis,
+		})
+		.end((err, sres) => {
+		  if (err) { console.log(err); }
+		  response.ok(sres.body.values, res)
+		});
+	}
+
+	else{
+		superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/p/daftar/inap/rm')
+		.query({ 
+			key: req.query.key,
+			// jenis : req.query.jenis,
+		})
+		.end((err, sres) => {
+		  if (err) { console.log(err); }
+		  response.ok(sres.body.values, res)
+		});
+	}
+};
+
 exports.searchPasienDaftar = function(req, res){
 	
 	const svcConfig = svc1Config;
@@ -114,8 +143,6 @@ exports.searchPasienDaftar = function(req, res){
 		  response.ok(sres.body.values, res)
 		});
 	}
-	
-	
 };
 
 exports.searchPasienDaftarInap = function(req, res){
@@ -123,6 +150,21 @@ exports.searchPasienDaftarInap = function(req, res){
 	const svcConfig = svc1Config;
 	
 	superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/p/daftar/inap')
+	.query({ 
+		key: req.query.key,
+		// jenis : req.query.jenis,
+	})
+	.end((err, sres) => {
+	  if (err) { console.log(err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
+exports.searchPasienDaftarInapRM = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/p/daftar/inap/rm')
 	.query({ 
 		key: req.query.key,
 		// jenis : req.query.jenis,
