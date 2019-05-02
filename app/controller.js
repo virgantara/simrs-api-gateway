@@ -4,6 +4,55 @@ var response = require('../app/res.js');
 const superagent = require('superagent');
 const svc1Config = require('./../config/svc1.json');
 
+exports.bill_getTagihan = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	superagent.get(svcConfig.billing.protocol+'://'+svcConfig.billing.host+':'+svcConfig.billing.port+'/tagihan/get')
+	.query({ 
+		id	: req.query.id,
+	})
+	.end((err, sres) => {
+	  if (err) { console.log(err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
+exports.bill_listTagihan = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	superagent.post(svcConfig.billing.protocol+'://'+svcConfig.billing.host+':'+svcConfig.billing.port+'/tagihan/list')
+	.send(req.body)
+	.end((err, sres) => {
+	  if (err) { console.log(err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
+exports.bill_updateTagihan = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	superagent.post(svcConfig.billing.protocol+'://'+svcConfig.billing.host+':'+svcConfig.billing.port+'/tagihan/update')
+	.send(req.body)
+	.end((err, sres) => {
+	  if (err) { console.log(err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
+exports.bill_insertTagihan = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	superagent.post(svcConfig.billing.protocol+'://'+svcConfig.billing.host+':'+svcConfig.billing.port+'/tagihan/insert')
+	.send(req.body)
+	.end((err, sres) => {
+	  if (err) { console.log(err); }
+	  response.ok(sres.body.values, res)
+	});
+};
 
 exports.syncStokBarangDepartemen = function(req, res){
 	

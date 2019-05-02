@@ -2,6 +2,17 @@
 module.exports = function(app) {
   var todoList = require('../app/controller');
 
+  app.route('/tagihan/get')
+    .get(todoList.bill_getTagihan);
+
+  app.route('/tagihan/list')
+    .post(todoList.bill_listTagihan);
+
+  app.route('/tagihan/update')
+    .post(todoList.bill_updateTagihan);
+
+  app.route('/tagihan/insert')
+    .post(todoList.bill_insertTagihan);
 
   app.route('/integra/generate/stok')
     .post(todoList.syncStokBarangDepartemen);
@@ -40,6 +51,8 @@ module.exports = function(app) {
 
   app.route('/p/obat/inap')
     .post(todoList.inputObatInap);
+
+
   // app.route('/tasks/:taskId')
   //   .get(todoList.read_a_task)
   //   .put(todoList.update_a_task)
