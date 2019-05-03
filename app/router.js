@@ -2,6 +2,9 @@
 module.exports = function(app) {
   var todoList = require('../app/controller');
 
+  app.route('/tagihan/receiveClientMsg')
+    .post(todoList.bill_receiveClientMsg);
+
   app.route('/tagihan/get')
     .get(todoList.bill_getTagihan);
 

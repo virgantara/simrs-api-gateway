@@ -4,6 +4,29 @@ var response = require('../app/res.js');
 const superagent = require('superagent');
 const svc1Config = require('./../config/svc1.json');
 
+exports.bill_receiveClientMsg = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	let client_id = req.headers.client_id;
+	
+	if(client_id == 'integra')
+	{
+		superagent.post(svcConfig.integra.protocol+'://'+svcConfig.integra.host+':'+svcConfig.integra.port+'/integra/p/update')
+		.send(req.body)
+		.end((err, sres) => {
+		  if (err) { console.log(err); }
+		  response.ok(sres.body.values, res)
+		});	
+	}
+
+	else if(client_id == 'simrs')
+	{
+
+	}
+};
+
+
 exports.bill_getTagihan = function(req, res){
 	
 	const svcConfig = svc1Config;
