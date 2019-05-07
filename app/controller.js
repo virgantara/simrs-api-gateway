@@ -19,7 +19,6 @@ exports.bill_receiveClientMsg = function(req, res){
 		  response.ok(sres.body.values, res)
 		});	
 	}
-
 	else if(client_id == 'simrs')
 	{
 		superagent.post(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/simrs/poli/update')
