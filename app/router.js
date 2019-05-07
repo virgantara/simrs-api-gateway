@@ -34,6 +34,9 @@ module.exports = function(app) {
   app.route('/pasien/rm')
     .get(todoList.searchRM);
 
+  app.route('/pasien/list')
+    .get(todoList.get_list_pasien);
+
   app.route('/p/daftar')
     .get(todoList.searchPasienDaftar);
 

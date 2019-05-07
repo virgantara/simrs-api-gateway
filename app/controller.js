@@ -4,6 +4,22 @@ var response = require('../app/res.js');
 const superagent = require('superagent');
 const svc1Config = require('./../config/svc1.json');
 
+exports.get_list_pasien = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/pasien/list')
+	.query({ 
+		limit	: req.query.limit,
+		page : req.query.page
+	})
+	.end((err, sres) => {
+	  if (err) { console.log(err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
+
 exports.bill_receiveClientMsg = function(req, res){
 	
 	const svcConfig = svc1Config;
