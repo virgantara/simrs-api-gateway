@@ -22,7 +22,12 @@ exports.bill_receiveClientMsg = function(req, res){
 
 	else if(client_id == 'simrs')
 	{
-
+		superagent.post(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/simrs/poli/update')
+		.send(req.body)
+		.end((err, sres) => {
+		  if (err) { console.log(err); }
+		  response.ok(sres.body.values, res)
+		});	
 	}
 };
 
