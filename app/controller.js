@@ -4,6 +4,21 @@ var response = require('../app/res.js');
 const superagent = require('superagent');
 const svc1Config = require('./../config/svc1.json');
 
+
+exports.obat_tagihan_update = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	let body = req.body ? req.body : '';
+	superagent.post(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/obat/tagihan/update')
+	.send(body)
+	.end((err, sres) => {
+	  if (err) { console.log("API Gateway:"+err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
+
 exports.get_list_pasien = function(req, res){
 	
 	const svcConfig = svc1Config;
