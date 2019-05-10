@@ -103,9 +103,9 @@ exports.bill_updateTagihan = function(req, res){
 exports.bill_insertTagihan = function(req, res){
 	
 	const svcConfig = svc1Config;
-	
+	let body = req.body ? req.body : '';
 	superagent.post(svcConfig.billing.protocol+'://'+svcConfig.billing.host+':'+svcConfig.billing.port+'/tagihan/insert')
-	.send(req.body)
+	.send(body)
 	.end((err, sres) => {
 	  if (err) { console.log(err); }
 	  response.ok(sres.body.values, res)
