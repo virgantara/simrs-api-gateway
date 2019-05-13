@@ -5,6 +5,22 @@ const superagent = require('superagent');
 const svc1Config = require('./../config/svc1.json');
 
 
+exports.poli_rekap_kunjungan = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/poli/rekap/kunjungan')
+	.query({
+		startdate : req.query.startdate,
+		enddate : req.query.enddate
+	})
+	.end((err, sres) => {
+	  if (err) { console.log("API Gateway:"+err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
+
 exports.obat_tagihan_update = function(req, res){
 	
 	const svcConfig = svc1Config;
