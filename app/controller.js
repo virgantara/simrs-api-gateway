@@ -4,6 +4,53 @@ var response = require('../app/res.js');
 const superagent = require('superagent');
 const svc1Config = require('./../config/svc1.json');
 
+exports.countKunjunganGolonganByKode = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/kunjungan/golongan/count')
+	.query({
+		kode : req.query.kode,
+		startdate : req.query.startdate,
+		enddate : req.query.enddate
+	})
+	.end((err, sres) => {
+	  if (err) { console.log("API Gateway:"+err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
+exports.pasien_list_golongan = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/p/golongan/list')
+	.query({
+		startdate : req.query.startdate,
+		enddate : req.query.enddate
+	})
+	.end((err, sres) => {
+	  if (err) { console.log("API Gateway:"+err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
+exports.poli_kunjungan_golongan = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/poli/kunjungan/golongan')
+	.query({
+		startdate : req.query.startdate,
+		enddate : req.query.enddate
+	})
+	.end((err, sres) => {
+	  if (err) { console.log("API Gateway:"+err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
+
 exports.get_laba = function(req, res){
 	
 	const svcConfig = svc1Config;

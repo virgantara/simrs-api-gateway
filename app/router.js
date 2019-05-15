@@ -2,11 +2,17 @@
 module.exports = function(app) {
   var todoList = require('../app/controller');
 
+   app.route('/kunjungan/golongan/count')
+    .get(todoList.countKunjunganGolonganByKode);
+
   app.route('/integra/laba')
     .get(todoList.get_laba);
 
   app.route('/kamar/rekap/kunjungan')
     .get(todoList.kamar_rekap_kunjungan);
+
+  app.route('/poli/kunjungan/golongan')
+    .get(todoList.poli_kunjungan_golongan);
 
   app.route('/poli/rekap/kunjungan')
     .get(todoList.poli_rekap_kunjungan);
@@ -66,6 +72,9 @@ module.exports = function(app) {
 
   app.route('/m/unit/list')
     .get(todoList.searchAllRefUnit);
+
+  app.route('/p/golongan/list')
+    .get(todoList.pasien_list_golongan);
 
   app.route('/p/obat/inap')
     .post(todoList.inputObatInap);
