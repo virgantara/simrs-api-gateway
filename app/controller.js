@@ -4,6 +4,20 @@ var response = require('../app/res.js');
 const superagent = require('superagent');
 const svc1Config = require('./../config/svc1.json');
 
+exports.kamar_rekap_kunjungan = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/kamar/rekap/kunjungan')
+	.query({
+		startdate : req.query.startdate,
+		enddate : req.query.enddate
+	})
+	.end((err, sres) => {
+	  if (err) { console.log("API Gateway:"+err); }
+	  response.ok(sres.body.values, res)
+	});
+};
 
 exports.poli_rekap_kunjungan = function(req, res){
 	
