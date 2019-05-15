@@ -4,6 +4,21 @@ var response = require('../app/res.js');
 const superagent = require('superagent');
 const svc1Config = require('./../config/svc1.json');
 
+exports.get_laba = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	superagent.get(svcConfig.integra.protocol+'://'+svcConfig.integra.host+':'+svcConfig.integra.port+'/integra/laba')
+	.query({
+		startdate : req.query.startdate,
+		enddate : req.query.enddate
+	})
+	.end((err, sres) => {
+	  if (err) { console.log("API Gateway:"+err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
 exports.kamar_rekap_kunjungan = function(req, res){
 	
 	const svcConfig = svc1Config;
