@@ -85,7 +85,7 @@ exports.bill_receiveClientMsg = function(req, res){
 	const svcConfig = svc1Config;
 	
 	let client_id = req.headers.client_id;
-	
+
 	if(client_id == 'integra')
 	{
 		superagent.post(svcConfig.integra.protocol+'://'+svcConfig.integra.host+':'+svcConfig.integra.port+'/integra/p/update')
@@ -103,6 +103,10 @@ exports.bill_receiveClientMsg = function(req, res){
 		  if (err) { console.log(err); }
 		  response.ok(sres.body.values, res)
 		});	
+	}
+
+	else{
+		response.ok([], res)
 	}
 };
 
