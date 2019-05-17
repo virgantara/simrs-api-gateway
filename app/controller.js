@@ -207,7 +207,15 @@ exports.bill_updateTagihan = function(req, res){
 	.send(req.body)
 	.end((err, sres) => {
 	  if (err) { console.log(err); }
-	  response.ok(sres.body.values, res)
+	  superagent.post(svcConfig.integra.protocol+'://'+svcConfig.integra.host+':'+svcConfig.integra.port+'/integra/p/update')
+		.send(req.body)
+		.end((err, sres) => {
+		  if (err) { 
+		  	console.log(err); 
+		  }
+		  response.ok(sres.body.values, res)
+		});
+	  // response.ok(sres.body.values, res)
 	});
 };
 
