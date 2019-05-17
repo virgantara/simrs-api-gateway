@@ -2,7 +2,10 @@
 module.exports = function(app) {
   var todoList = require('../app/controller');
 
-   app.route('/kunjungan/golongan/count')
+  app.route('/kunjungan/golongan/count/lastfive')
+    .get(todoList.countKunjunganGolongan5tahun);
+
+  app.route('/kunjungan/golongan/count')
     .get(todoList.countKunjunganGolonganByKode);
 
   app.route('/integra/laba')

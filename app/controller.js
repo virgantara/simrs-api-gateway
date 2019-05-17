@@ -4,6 +4,21 @@ var response = require('../app/res.js');
 const superagent = require('superagent');
 const svc1Config = require('./../config/svc1.json');
 
+exports.countKunjunganGolongan5tahun = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/kunjungan/golongan/count/lastfive')
+	.query({
+		kode : req.query.kode
+	})
+	.end((err, sres) => {
+	  if (err) { console.log("API Gateway:"+err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
+
 exports.countKunjunganGolonganByKode = function(req, res){
 	
 	const svcConfig = svc1Config;
@@ -130,9 +145,10 @@ exports.bill_receiveClientMsg = function(req, res){
 	const svcConfig = svc1Config;
 	
 	let client_id = req.headers.client_id;
-
+	console.log(req.headers);
 	if(client_id == 'integra')
 	{
+		console.log(req.body);
 		superagent.post(svcConfig.integra.protocol+'://'+svcConfig.integra.host+':'+svcConfig.integra.port+'/integra/p/update')
 		.send(req.body)
 		.end((err, sres) => {
