@@ -4,6 +4,7 @@ var response = require('../app/res.js');
 const superagent = require('superagent');
 const svc1Config = require('./../config/svc1.json');
 
+
 exports.countKunjunganGolongan5tahun = function(req, res){
 	
 	const svcConfig = svc1Config;
@@ -202,7 +203,10 @@ exports.bill_listTagihan = function(req, res){
 exports.bill_updateTagihan = function(req, res){
 	
 	const svcConfig = svc1Config;
-	
+	// const [foo, bar] = await Promise.all([
+	//   superagent.get('foo'),
+	//   superagent.get('bar'),
+	// ]);
 	superagent.post(svcConfig.billing.protocol+'://'+svcConfig.billing.host+':'+svcConfig.billing.port+'/tagihan/update')
 	.send(req.body)
 	.end((err, sres) => {
@@ -213,9 +217,9 @@ exports.bill_updateTagihan = function(req, res){
 		  if (err) { 
 		  	console.log(err); 
 		  }
-		  response.ok(sres.body.values, res)
+		  
 		});
-	  // response.ok(sres.body.values, res)
+	  response.ok(sres.body.values, res)
 	});
 };
 
