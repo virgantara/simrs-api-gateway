@@ -11,8 +11,7 @@ exports.countKunjunganGolonganByKode = function(req, res){
 	superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/kunjungan/golongan/count')
 	.query({
 		kode : req.query.kode,
-		startdate : req.query.startdate,
-		enddate : req.query.enddate
+		tahun : req.query.tahun
 	})
 	.end((err, sres) => {
 	  if (err) { console.log("API Gateway:"+err); }
@@ -26,8 +25,7 @@ exports.pasien_list_golongan = function(req, res){
 	
 	superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/p/golongan/list')
 	.query({
-		startdate : req.query.startdate,
-		enddate : req.query.enddate
+		tahun : req.query.tahun
 	})
 	.end((err, sres) => {
 	  if (err) { console.log("API Gateway:"+err); }
