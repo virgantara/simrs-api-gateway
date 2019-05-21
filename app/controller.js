@@ -4,6 +4,21 @@ var response = require('../app/res.js');
 const superagent = require('superagent');
 const svc1Config = require('./../config/svc1.json');
 
+exports.getSexUsiaGolTanggal = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/p/gol/sexusia')
+	.query({
+		kode : req.query.kode,
+		sd : req.query.sd,
+		ed : req.query.ed
+	})
+	.end((err, sres) => {
+	  if (err) { console.log("API Gateway:"+err); }
+	  response.ok(sres.body.values, res)
+	});
+};
 
 exports.countKunjunganGolongan5tahun = function(req, res){
 	
@@ -29,6 +44,17 @@ exports.countKunjunganGolonganByKode = function(req, res){
 		kode : req.query.kode,
 		tahun : req.query.tahun
 	})
+	.end((err, sres) => {
+	  if (err) { console.log("API Gateway:"+err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
+exports.pasien_list_golongan_five = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/p/golongan/list/five')
 	.end((err, sres) => {
 	  if (err) { console.log("API Gateway:"+err); }
 	  response.ok(sres.body.values, res)

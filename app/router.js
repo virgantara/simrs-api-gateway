@@ -5,6 +5,9 @@ module.exports = function(app) {
   app.route('/kunjungan/golongan/count/lastfive')
     .get(todoList.countKunjunganGolongan5tahun);
 
+  app.route('/p/gol/sexusia')
+    .get(todoList.getSexUsiaGolTanggal);
+
   app.route('/kunjungan/golongan/count')
     .get(todoList.countKunjunganGolonganByKode);
 
@@ -78,6 +81,9 @@ module.exports = function(app) {
 
   app.route('/p/golongan/list')
     .get(todoList.pasien_list_golongan);
+
+  app.route('/p/golongan/list/five')
+    .get(todoList.pasien_list_golongan_five);
 
   app.route('/p/obat/inap')
     .post(todoList.inputObatInap);
