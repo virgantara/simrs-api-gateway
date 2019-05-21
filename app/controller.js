@@ -67,7 +67,8 @@ exports.pasien_list_golongan = function(req, res){
 	
 	superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/p/golongan/list')
 	.query({
-		tahun : req.query.tahun
+		tahun : req.query.tahun,
+		kode : req.query.kode
 	})
 	.end((err, sres) => {
 	  if (err) { console.log("API Gateway:"+err); }
