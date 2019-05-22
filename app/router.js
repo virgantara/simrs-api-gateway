@@ -82,6 +82,9 @@ module.exports = function(app) {
   app.route('/p/golongan/list')
     .get(todoList.pasien_list_golongan);
 
+  app.route('/p/unit/list')
+    .get(todoList.pasien_list_unit);
+
   app.route('/p/golongan/list/five')
     .get(todoList.pasien_list_golongan_five);
 

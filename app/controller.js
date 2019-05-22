@@ -10,7 +10,8 @@ exports.getSexUsiaGolTanggal = function(req, res){
 	
 	superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/p/gol/sexusia')
 	.query({
-		kode : req.query.kode,
+		tipe : req.query.tipe,
+		key : req.query.key,
 		sd : req.query.sd,
 		ed : req.query.ed
 	})
@@ -49,6 +50,23 @@ exports.countKunjunganGolonganByKode = function(req, res){
 	  response.ok(sres.body.values, res)
 	});
 };
+
+exports.pasien_list_unit = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/p/unit/list')
+	.query({
+		tipe : req.query.tipe,
+		bulan : req.query.bulan,
+		tahun : req.query.tahun
+	})
+	.end((err, sres) => {
+	  if (err) { console.log("API Gateway:"+err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
 
 exports.pasien_list_golongan_five = function(req, res){
 	
