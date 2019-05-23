@@ -11,6 +11,12 @@ module.exports = function(app) {
   app.route('/kunjungan/golongan/count')
     .get(todoList.countKunjunganGolonganByKode);
 
+  app.route('/integra/pembelian')
+    .get(todoList.get_pembelian);
+
+  app.route('/integra/penjualan')
+    .get(todoList.get_penjualan);
+
   app.route('/integra/laba')
     .get(todoList.get_laba);
 

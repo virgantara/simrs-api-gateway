@@ -109,6 +109,36 @@ exports.poli_kunjungan_golongan = function(req, res){
 	});
 };
 
+exports.get_pembelian = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	superagent.get(svcConfig.integra.protocol+'://'+svcConfig.integra.host+':'+svcConfig.integra.port+'/integra/pembelian')
+	.query({
+		startdate : req.query.startdate,
+		enddate : req.query.enddate
+	})
+	.end((err, sres) => {
+	  if (err) { console.log("API Gateway:"+err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
+exports.get_penjualan = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	superagent.get(svcConfig.integra.protocol+'://'+svcConfig.integra.host+':'+svcConfig.integra.port+'/integra/penjualan')
+	.query({
+		startdate : req.query.startdate,
+		enddate : req.query.enddate
+	})
+	.end((err, sres) => {
+	  if (err) { console.log("API Gateway:"+err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
 
 exports.get_laba = function(req, res){
 	
