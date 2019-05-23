@@ -4,6 +4,20 @@ var response = require('../app/res.js');
 const superagent = require('superagent');
 const svc1Config = require('./../config/svc1.json');
 
+exports.getTopTenPenyakit = function(req, res){
+	
+	const svcConfig = svc1Config;
+	
+	superagent.get(svcConfig.pasien.protocol+'://'+svcConfig.pasien.host+':'+svcConfig.pasien.port+'/p/penyakit/top')
+	.query({
+		tahun : req.query.tahun,
+	})
+	.end((err, sres) => {
+	  if (err) { console.log("API Gateway:"+err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
 exports.getSexUsiaGolTanggal = function(req, res){
 	
 	const svcConfig = svc1Config;
