@@ -2,6 +2,9 @@
 module.exports = function(app) {
   var todoList = require('../app/controller');
 
+  app.route('/ok/rekap/bulanan')
+    .get(todoList.getRekapTindakanOperasi);
+
   app.route('/p/penyakit/top')
     .get(todoList.getTopTenPenyakit);
 
