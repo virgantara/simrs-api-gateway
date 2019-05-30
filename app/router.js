@@ -2,6 +2,9 @@
 module.exports = function(app) {
   var todoList = require('../app/controller');
 
+  app.route('/ok/count/tahunan')
+    .get(todoList.getTotalOperasiTahun);
+
   app.route('/ok/rekap/operator')
     .get(todoList.getRekapOperator);
 

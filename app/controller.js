@@ -4,6 +4,20 @@ var response = require('../app/res.js');
 const superagent = require('superagent');
 const svc1Config = require('./../config/svc1.json');
 
+exports.getTotalOperasiTahun = function(req, res){	
+	const svcConfig = svc1Config;
+	
+	superagent.get(svcConfig.operasi.protocol+'://'+svcConfig.operasi.host+':'+svcConfig.operasi.port+'/ok/count/tahunan')
+	.query({
+		sd : req.query.sd,
+		ed : req.query.ed
+	})
+	.end((err, sres) => {
+	  if (err) { console.log("API Gateway:"+err); }
+	  response.ok(sres.body.values, res)
+	});
+};
+
 exports.getRekapOperator = function(req, res){
 	const svcConfig = svc1Config;	
 	superagent.get(svcConfig.operasi.protocol+'://'+svcConfig.operasi.host+':'+svcConfig.operasi.port+'/ok/rekap/operator')
